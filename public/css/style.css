@@ -1,0 +1,46 @@
+/* Global */
+html, body {
+    scroll-behavior: smooth;
+}
+
+/* FA icons */
+.fas, .fab {
+    font-size: 4rem;
+    margin: 1rem;
+}
+
+.fa-code {
+    color: #e54d26;
+}
+
+.fa-css3 {
+    color: #2163af;
+}
+
+.fa-js-square {
+    color: #EFD55A;
+}
+
+.fa-php {
+    color: #4F5B93;
+}
+
+/* Overwriting bootstrap */
+hr {
+    border-top-width: 2px !important;
+}
+
+/* Other */
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.parallax {
+    background-image: url("../images/parallax.jpg");
+    height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

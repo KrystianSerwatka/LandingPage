@@ -1,16 +1,19 @@
 <?php
 require("connect.php");
+require("form_data.php");
 
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $checkbox = $_POST['checkbox'];
+    // Fetch user IP
+    $user_ip = $_SERVER['REMOTE_ADDR'];
 
     // Adding records to database
-    $sql = "INSERT INTO `form` (`name`, `email`, `phone`, `form_checked_agree`) VALUES (:name, :email, :phone, :form_checked_agree)";
+    $sql = "INSERT INTO `form` (`name`, `email`, `phone`, `form_checked_agree`, `user_ip`) VALUES (:name, :email, :phone, :form_checked_agree, :user_ip)";
     $res = $dbconn->prepare($sql);
-    $exec = $res->execute(array(":name" => $name, ":email" => $email, ":phone" => $phone, ":form_checked_agree" => $checkbox));
+    $exec = $res->execute(array(":name" => $name, ":email" => $email, ":phone" => $phone, ":form_checked_agree" => $checkbox, ":user_ip" => $user_ip));
 
     // Sending content from form to email
     $headers = "From: test@gmail.com";

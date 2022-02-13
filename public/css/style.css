@@ -30,6 +30,21 @@ hr {
     border-top-width: 2px !important;
 }
 
+/* Cookies */
+
+.cookie-container {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    transition: 400ms;
+}
+
+.cookie-container.active {
+    bottom: 0;
+}
+
 /* Other */
 .nopadding {
     padding: 0 !important;

@@ -213,6 +213,20 @@
                 </div>
             </div>
         </div>
+        <!-- Cookies -->
+        <div class="container-fluid cookie-container py-3">
+            <div class="row text-center">
+                <div class="col-12">
+                    <p>
+                        W naszym serwisie używamy plików cookies. Korzystając dalej z serwisu, wyrażasz zgodę na stosowanie plików cookies zgodnie z polityką informacyjną. Wyrażenie zgody jest dobrowolne, w każdej chwili można ją cofnąć poprzez zmianę ustawień dotyczących plików „cookies” w używanej przeglądarce internetowej. Kliknij <b>„Akceptuję”</b>, aby ta informacja nie wyświetlała się więcej.
+                    </p>
+                    <div class="row cookie-buttons-container">
+                        <div class="col-sm-6"><a href=" https://wszystkoociasteczkach.pl/" target="_blank"><button type="button" class="btn btn-secondary">Dowiedz się więcej</button></a></div>
+                        <div class="col-sm-6"><button type="button" class="btn btn-success mt-3 mt-sm-0">Akceptuję</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

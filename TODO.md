@@ -2,7 +2,7 @@
 
 ### FRONT
 
-- [ ] Dodać informację na temat ciasteczek na stronie. -> https://www.youtube.com/watch?v=R_-oGJBg3nw&ab_channel=GTCoding
+- [x] Dodać informację na temat ciasteczek na stronie.
 
 ### BACKEND
 - [x] Podzielić pliki na view.php, submit.php itd.

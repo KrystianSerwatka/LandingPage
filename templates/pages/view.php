@@ -18,7 +18,7 @@
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" id="navbarOne">
             <div class="container">
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="#">Krystian Serwatka</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -209,7 +209,7 @@
         <div class="container-fluid bg-dark text-white">
             <div class="row text-center pt-3">
                 <div class="col-12">
-                    <p>© 2021 Projekt i realizacja Krystian Serwatka</p>
+                    <p>© 2022 Projekt i realizacja Krystian Serwatka</p>
                 </div>
             </div>
         </div>

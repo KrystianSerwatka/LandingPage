@@ -1,14 +1,30 @@
 <?php
 require("connect.php");
-require("form_data.php");
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
+    $name = test_input($_POST['name']);
+    $email = test_input($_POST['email']);
+    $phone = test_input($_POST['phone']);
     $checkbox = $_POST['checkbox'];
     // Fetch user IP
     $user_ip = $_SERVER['REMOTE_ADDR'];
+
+    session_start();
+    if (empty($name) || empty($email) || empty($phone) || empty($phone) || empty($checkbox)) {
+        if (!preg_match("/^[a-zA-z]*$/", $name) || (!filter_var($email, FILTER_VALIDATE_EMAIL)) || (!preg_match("[0-9]{3}-[0-9]{3}-[0-9]{3}", $phone)) || (!isset($checkbox))) {
+            $_SESSION['failed_message'] = "Upewnij się, że wypełniłeś wszystkie pola zaznaczone czerwoną gwiazdką!";
+        }
+    } else {
+        $_SESSION['success_message'] = "Pomyślnie wysłano formularz kontaktowy 👋";
+    }
 
     // Adding records to database
     $sql = "INSERT INTO `form` (`name`, `email`, `phone`, `form_checked_agree`, `user_ip`) VALUES (:name, :email, :phone, :form_checked_agree, :user_ip)";
@@ -26,4 +42,7 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<h1>Email nie został wysłany, coś poszło nie tak...\nSpróbuj ponownie lub skontaktuj się z właścicielem strony<h1>";
     }
+    header("Location:http://localhost/LandingPage/#contact");
+} else {
+    echo "Wystąpił błąd. Spróbuj później";
 }

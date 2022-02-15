@@ -6,7 +6,7 @@
 
 ### BACKEND
 - [x] Podzielić pliki na view.php, submit.php itd.
-- [ ] Dodać filtrowanie po stronie serwera PHP do formularza - inputów. -> https://www.javatpoint.com/form-validation-in-php
+- [x] Dodać filtrowanie po stronie serwera PHP do formularza - inputów.
 - [ ] Ogarnąć ban na IP na 5 min po wysłaniu formularza za pomocą cookies.
 - [x] Dodać do bazy danych, czy dany użytkownik zaznaczył checkbox przy wysyłaniu formularza.
 - [x] Pozmieniać odpowiednio nazwy w bazie danych - na bardziej opisowe tak jak na lapku.

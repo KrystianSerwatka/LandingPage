@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -177,26 +178,46 @@
                     <div class="col-12 text-center mt-5 mb-5">
                         <h3>Skontaktuj się ze mną!</h3>
                     </div>
-                    <form id="form" method="POST" action="/projekt/src/sendmail.php">
+                    <?php if (isset($_SESSION['success_message'])) { ?>
+                        <div class="alert alert-success alert-dismissible text-center fade show" role="alert"><?php echo $_SESSION['success_message']; ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php
+                        unset($_SESSION['success_message']);
+                    }
+                    ?>
+                    <?php if (isset($_SESSION['failed_message'])) { ?>
+                        <div class="alert alert-danger alert-dismissible text-center fade show" role="alert"><?php echo $_SESSION['failed_message']; ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php
+                        unset($_SESSION['failed_message']);
+                    }
+                    ?>
+                    <form id="form" method="POST" action="src/sendmail.php">
                         <div class="form-row">
                             <div class="form-group col-md-12 col-lg-4">
-                                <label for="inputName">Imię i nazwisko</label>
-                                <input type="text" name="name" class="form-control" id="inputName" placeholder="np: Marcin Kowalski" pattern="[a-zA-Z'-'\s]*" required>
+                                <label for="inputName">Imię i nazwisko<span class="error">*</span></label>
+                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Krystian Serwatka" required>
                             </div>
                             <div class="form-group col-md-12 col-lg-4">
-                                <label for="inputEmail">Adres e-mail</label>
-                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="np: test@gmail.com" required>
+                                <label for="inputEmail">Adres e-mail<span class="error">*</span></label>
+                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="test@test.pl" required>
                             </div>
                             <div class="form-group col-md-12 col-lg-4">
-                                <label for="inputPhone">Telefon</label>
-                                <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="np: 123-456-789" title="Podaj numer telefonu w formacie: 123-123-123" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required>
+                                <label for="inputPhone">Telefon<span class="error">*</span></label>
+                                <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="123-456-789" title="Podaj numer telefonu w formacie: 123-123-123" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required="" oninvalid="this.setCustomValidity('Wypełnij te pole wedle wzoru placeholdera')" oninput="setCustomValidity('')">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="gridCheck" value="Zaakceptowano">
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="gridCheck" value="Zaakceptowano" required="" oninvalid="this.setCustomValidity('Wymagane jest zaznaczenie zgody')" oninput="setCustomValidity('')">
                                 <label class="form-check-label" for="gridCheck">
-                                    Wyrażam zgodę na przetwarzanie moich danych osobowych.
+                                    Wyrażam zgodę na przetwarzanie moich danych osobowych.<span class="error">*</span>
                                 </label>
                             </div>
                         </div>

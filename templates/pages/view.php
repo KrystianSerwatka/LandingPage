@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+require("src/cookies.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -202,20 +204,36 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 col-lg-4">
                                 <label for="inputName">Imię i nazwisko<span class="error">*</span></label>
-                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Krystian Serwatka" required>
+                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Krystian Serwatka" required <?php if (isset($_SESSION['name'])) {
+                                                                                                                                                echo 'style="border: 1px solid red;"';
+                                                                                                                                            } ?> <?php
+                                                                                                                                                    unset($_SESSION['name']);
+                                                                                                                                                    ?>>
                             </div>
                             <div class="form-group col-md-12 col-lg-4">
                                 <label for="inputEmail">Adres e-mail<span class="error">*</span></label>
-                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="test@test.pl" required>
+                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="test@test.pl" <?php if (isset($_SESSION['email'])) {
+                                                                                                                                        echo 'style="border: 1px solid red;"';
+                                                                                                                                    } ?> <?php
+                                                                                                                                            unset($_SESSION['email']);
+                                                                                                                                            ?>>
                             </div>
                             <div class="form-group col-md-12 col-lg-4">
                                 <label for="inputPhone">Telefon<span class="error">*</span></label>
-                                <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="123-456-789" title="Podaj numer telefonu w formacie: 123-123-123" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" required="" oninvalid="this.setCustomValidity('Wypełnij te pole wedle wzoru placeholdera')" oninput="setCustomValidity('')">
+                                <input type="tel" name="phone" class="form-control" id="inputPhone" placeholder="123-456-789" title="Podaj numer telefonu w formacie: 123-123-123" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" oninvalid="this.setCustomValidity('Wypełnij te pole wedle wzoru placeholdera')" oninput="setCustomValidity('')" <?php if (isset($_SESSION['phone'])) {
+                                                                                                                                                                                                                                                                                                                                            echo 'style="border: 1px solid red;"';
+                                                                                                                                                                                                                                                                                                                                        } ?> <?php
+                                                                                                                                                                                                                                                                                                                                                unset($_SESSION['phone']);
+                                                                                                                                                                                                                                                                                                                                                ?>>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="gridCheck" value="Zaakceptowano" required="" oninvalid="this.setCustomValidity('Wymagane jest zaznaczenie zgody')" oninput="setCustomValidity('')">
+                                <input class="form-check-input" type="checkbox" name="checkbox" id="gridCheck" value="Zaakceptowano" oninvalid="this.setCustomValidity('Wymagane jest zaznaczenie zgody')" oninput="setCustomValidity('')" <?php if (isset($_SESSION['checkbox'])) {
+                                                                                                                                                                                                                                                echo 'style="outline: 1px solid red; outline-style: auto;';
+                                                                                                                                                                                                                                            } ?> <?php
+                                                                                                                                                                                                                                                    unset($_SESSION['checkbox']);
+                                                                                                                                                                                                                                                    ?>>
                                 <label class="form-check-label" for="gridCheck">
                                     Wyrażam zgodę na przetwarzanie moich danych osobowych.<span class="error">*</span>
                                 </label>

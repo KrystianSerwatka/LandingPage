@@ -1,5 +1,7 @@
 <?php
+session_start();
 require("connect.php");
+
 
 function test_input($data)
 {
@@ -17,10 +19,33 @@ if (isset($_POST['submit'])) {
     // Fetch user IP
     $user_ip = $_SERVER['REMOTE_ADDR'];
 
-    session_start();
-    if (empty($name) || empty($email) || empty($phone) || empty($phone) || empty($checkbox)) {
-        if (!preg_match("/^[a-zA-z]*$/", $name) || (!filter_var($email, FILTER_VALIDATE_EMAIL)) || (!preg_match("[0-9]{3}-[0-9]{3}-[0-9]{3}", $phone)) || (!isset($checkbox))) {
-            $_SESSION['failed_message'] = "Upewnij się, że wypełniłeś wszystkie pola zaznaczone czerwoną gwiazdką!";
+    // Validation inputs form
+    if (isset($name)) {
+        if (empty($name) || (!preg_match("/^[a-zA-z]*$/", $name))) {
+            $_SESSION['name'] = "Uzupełnij Imię i nazwisko";
+        }
+    }
+
+    if (isset($email)) {
+        if (empty($email) || (!filter_var($email, FILTER_VALIDATE_EMAIL))) {
+            $_SESSION['email'] = "Uzupełnij Adres email";
+        }
+    }
+
+    if (isset($phone)) {
+        if (empty($phone) || (!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/", $phone))) {
+            $_SESSION['phone'] = "Uzupełnij Telefon";
+        }
+    }
+
+    if (!isset($checkbox)) {
+        $_SESSION['checkbox'] = "Zaznacz checkbox";
+    }
+
+    // Message after send form
+    if (empty($name) || empty($email) || empty($phone) || !isset($checkbox)) {
+        if (!preg_match("/^[a-zA-z]*$/", $name) || (!filter_var($email, FILTER_VALIDATE_EMAIL)) || (!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/", $phone)) || (!isset($checkbox))) {
+            $_SESSION['failed_message'] = "Wypełnij pola zaznaczone na czerwono!";
         }
     } else {
         $_SESSION['success_message'] = "Pomyślnie wysłano formularz kontaktowy 👋";

@@ -2,7 +2,6 @@
 session_start();
 require("connect.php");
 
-
 function test_input($data)
 {
     $data = trim($data);
@@ -21,7 +20,7 @@ if (isset($_POST['submit'])) {
 
     // Validation inputs form
     if (isset($name)) {
-        if (empty($name) || (!preg_match("/^[a-zA-z]*$/", $name))) {
+        if (empty($name) || (!preg_match("/^[a-zA-z\s]*$/", $name))) {
             $_SESSION['name'] = "Uzupełnij Imię i nazwisko";
         }
     }
@@ -43,7 +42,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Message after send form
-    if (empty($name) || (!preg_match("/^[a-zA-z]*$/", $name)) || empty($email) || (!filter_var($email, FILTER_VALIDATE_EMAIL)) || empty($phone) || (!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/", $phone)) || !isset($checkbox)) {
+    if (empty($name) || (!preg_match("/^[a-zA-z\s]*$/", $name)) || empty($email) || (!filter_var($email, FILTER_VALIDATE_EMAIL)) || empty($phone) || (!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/", $phone)) || !isset($checkbox)) {
         $_SESSION['failed_message'] = "Wypełnij poprawnie pola zaznaczone na czerwono!";
     } else {
         $_SESSION['success_message'] = "Pomyślnie wysłano formularz kontaktowy 👋";

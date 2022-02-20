@@ -1,8 +1,17 @@
 <?php session_start();
+
+require("src/cookies.php");
+
 if (isset($_SESSION['success_message'])) {
-    require("src/cookies.php");
     require("src/anti_spam.php");
 }
+
+if (isset($_SESSION['added_five_mins'])) {
+    $currentDate = date('H:i:s');
+    $addFiveMins = strtotime("+5 minutes", strtotime($currentDate));
+    $addedFiveMins = date('h:i:s', $addFiveMins);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +33,7 @@ if (isset($_SESSION['success_message'])) {
         <!-- Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" id="navbarOne">
             <div class="container">
-                <a class="navbar-brand" href="#">Krystian Serwatka</a>
+                <a class="navbar-brand" href="#home">Krystian Serwatka</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -242,7 +251,21 @@ if (isset($_SESSION['success_message'])) {
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-primary" id="submitBtn" name="submit">Wyślij formularz</button>
+                        <button class="btn btn-primary <?php if (isset($_SESSION['hide_button'])) {
+                                                            echo " d-none";
+                                                        } ?><?php
+                                                            if (time() - $_SESSION['hide_button'] > 300) {
+                                                                unset($_SESSION['hide_button']);
+                                                            }
+                                                            ?>" id="submitBtn" name="submit">Wyślij formularz</button>
+                        <?php if (isset($_SESSION['show_timer'])) { ?>
+                            <div class="alert alert-info text-center align-middle" role="alert"><?php echo "<h3>Kolejnego maila możesz wysłać o godzinie: " . "<b>" . $_SESSION['added_five_mins'] . "</b>" . "</h3>"; ?></div>
+                        <?php
+                            if (time() - $_SESSION['show_timer'] > 300) {
+                                unset($_SESSION['show_timer']);
+                            }
+                        }
+                        ?>
                     </form>
                 </div>
             </div>
@@ -254,27 +277,26 @@ if (isset($_SESSION['success_message'])) {
                     <p>© 2022 Projekt i realizacja Krystian Serwatka</p>
                 </div>
             </div>
-        </div>
-        <!-- Cookies -->
-        <div class="container-fluid cookie-container py-3">
-            <div class="row text-center">
-                <div class="col-12">
-                    <p>
-                        W naszym serwisie używamy plików cookies. Korzystając dalej z serwisu, wyrażasz zgodę na stosowanie plików cookies zgodnie z polityką informacyjną. Wyrażenie zgody jest dobrowolne, w każdej chwili można ją cofnąć poprzez zmianę ustawień dotyczących plików „cookies” w używanej przeglądarce internetowej. Kliknij <b>„Akceptuję”</b>, aby ta informacja nie wyświetlała się więcej.
-                    </p>
-                    <div class="row cookie-buttons-container">
-                        <div class="col-sm-6"><a href=" https://wszystkoociasteczkach.pl/" target="_blank"><button type="button" class="btn btn-secondary">Dowiedz się więcej</button></a></div>
-                        <div class="col-sm-6"><button type="button" class="btn btn-success mt-3 mt-sm-0">Akceptuję</button></div>
+            <!-- Cookies -->
+            <div class="container-fluid cookie-container py-3">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <p>
+                            W naszym serwisie używamy plików cookies. Korzystając dalej z serwisu, wyrażasz zgodę na stosowanie plików cookies zgodnie z polityką informacyjną. Wyrażenie zgody jest dobrowolne, w każdej chwili można ją cofnąć poprzez zmianę ustawień dotyczących plików „cookies” w używanej przeglądarce internetowej. Kliknij <b>„Akceptuję”</b>, aby ta informacja nie wyświetlała się więcej.
+                        </p>
+                        <div class="row cookie-buttons-container">
+                            <div class="col-sm-6"><a href=" https://wszystkoociasteczkach.pl/" target="_blank"><button type="button" class="btn btn-secondary">Dowiedz się więcej</button></a></div>
+                            <div class="col-sm-6"><button type="button" class="btn btn-success mt-3 mt-sm-0">Akceptuję</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <!-- JS -->
-    <script src="public/js/main.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <!-- JS -->
+        <script src="public/js/main.js"></script>
 </body>
 
 </html>

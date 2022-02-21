@@ -12,5 +12,5 @@ setTimeout( () => {
     cookieContainer.classList.add("active");
 }, 2000);
 
-/* Successful message form */
+/* Successful message form button to close*/
 $().alert('close')

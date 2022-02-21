@@ -1,17 +1,10 @@
-<?php session_start();
-
+<?php
+session_start();
 require("src/cookies.php");
 
 if (isset($_SESSION['success_message'])) {
     require("src/anti_spam.php");
 }
-
-if (isset($_SESSION['added_five_mins'])) {
-    $currentDate = date('H:i:s');
-    $addFiveMins = strtotime("+5 minutes", strtotime($currentDate));
-    $addedFiveMins = date('h:i:s', $addFiveMins);
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -257,9 +250,12 @@ if (isset($_SESSION['added_five_mins'])) {
                                                             if (time() - $_SESSION['hide_button'] > 300) {
                                                                 unset($_SESSION['hide_button']);
                                                             }
-                                                            ?>" id="submitBtn" name="submit">Wyślij formularz</button>
+                                                            ?>" id="submitBtn" name="submit" <?php if (isset($_SESSION['hide_button'])) {
+                                                                                                    echo 'type="button"';
+                                                                                                } ?>>Wyślij formularz</button>
                         <?php if (isset($_SESSION['show_timer'])) { ?>
-                            <div class="alert alert-info text-center align-middle" role="alert"><?php echo "<h3>Kolejnego maila możesz wysłać o godzinie: " . "<b>" . $_SESSION['added_five_mins'] . "</b>" . "</h3>"; ?></div>
+                            <div class=" alert alert-info text-center align-middle" role="alert"><?php echo "<h3>Kolejnego maila możesz wysłać o godzinie: " . "<b>" . $_SESSION['added_five_mins'] . "</b>" . "</h3>"; ?>
+                            </div>
                         <?php
                             if (time() - $_SESSION['show_timer'] > 300) {
                                 unset($_SESSION['show_timer']);

@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
     $body = "Imię i nazwisko: $name\nAdres e-mail: $email\nNumer telefonu: $phone";
 
     if (mail($to_email, $subject, $body, $headers)) {
-        header("Location:http://localhost/projekt/#contact");
+        header("Location:http://localhost/LandingPage/#contact");
     } else {
         echo "<h1>Email nie został wysłany, coś poszło nie tak...\nSpróbuj ponownie lub skontaktuj się z właścicielem strony<h1>";
     }

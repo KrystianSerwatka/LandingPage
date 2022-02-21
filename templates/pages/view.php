@@ -5,6 +5,7 @@ require("src/cookies.php");
 if (isset($_SESSION['success_message'])) {
     require("src/anti_spam.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -247,7 +248,7 @@ if (isset($_SESSION['success_message'])) {
                         <button class="btn btn-primary <?php if (isset($_SESSION['hide_button'])) {
                                                             echo " d-none";
                                                         } ?><?php
-                                                            if (time() - $_SESSION['hide_button'] > 300) {
+                                                            if ((time() - $_SESSION['hide_button']) > 60) {
                                                                 unset($_SESSION['hide_button']);
                                                             }
                                                             ?>" id="submitBtn" name="submit" <?php if (isset($_SESSION['hide_button'])) {
@@ -257,7 +258,7 @@ if (isset($_SESSION['success_message'])) {
                             <div class=" alert alert-info text-center align-middle" role="alert"><?php echo "<h3>Kolejnego maila możesz wysłać o godzinie: " . "<b>" . $_SESSION['added_five_mins'] . "</b>" . "</h3>"; ?>
                             </div>
                         <?php
-                            if (time() - $_SESSION['show_timer'] > 300) {
+                            if ((time() - $_SESSION['show_timer']) > 60) {
                                 unset($_SESSION['show_timer']);
                             }
                         }
